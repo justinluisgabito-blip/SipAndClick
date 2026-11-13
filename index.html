@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sip & Click | Coffee Shop</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap');
+
+:root {
+  --brown: #593923;
+  --dark: #302117;
+  --cream: #fbf6ed;
+  --orange: #c47b45;
+  --light: #eee3d3;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+}
+
+button, input, select { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+
+header {
+  height: 82px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--cream);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid #e9dfd1;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Playfair Display', serif;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.logo-icon { font-size: 32px; }
+.logo em { color: var(--orange); }
+
+nav { display: flex; align-items: center; gap: 30px; }
+nav a { font-size: 14px; font-weight: 600; }
+nav a:hover { color: var(--orange); }
+
+.nav-btn, .btn {
+  border: none;
+  background: var(--brown);
+  color: white;
+  padding: 13px 21px;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: .2s;
+}
+
+.nav-btn:hover, .btn:hover { background: var(--orange); }
+.nav-btn span {
+  background: white;
+  color: var(--brown);
+  padding: 2px 7px;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+
+.hero {
+  min-height: 570px;
+  padding: 75px 9%;
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items: center;
+  gap: 45px;
+  background: #f4eadb;
+  overflow: hidden;
+}
+
+.eyebrow {
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  margin-bottom: 19px;
+}
+
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+  line-height: 1.12;
+}
+
+h1 { font-size: clamp(42px, 5vw, 66px); }
+h1 span, h2 em { color: var(--orange); }
+
+.hero-copy {
+  max-width: 470px;
+  color: #746657;
+  line-height: 1.9;
+  font-size: 15px;
+  margin: 24px 0;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 23px;
+  flex-wrap: wrap;
+}
+
+.text-link {
+  font-size: 13px;
+  font-weight: 700;
+  border-bottom: 1px solid var(--brown);
+  padding-bottom: 4px;
+}
+
+.hero-image {
+  position: relative;
+  height: 390px;
+  border-radius: 48% 48% 8px 8px;
+  overflow: hidden;
+  background: #d4b18c;
+}
+
+.hero-image img { width: 100%; height: 100%; object-fit: cover; }
+
+.image-tag {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  background: #fffaf0ee;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 28px 9%;
+  background: white;
+  gap: 25px;
+}
+
+.benefit { display: flex; gap: 13px; align-items: center; }
+.benefit-icon { font-size: 27px; color: var(--orange); }
+.benefit strong { display: block; font-size: 14px; }
+.benefit small {
+  color: #887969;
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+}
+
+.section { padding: 85px 8%; }
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 25px;
+  margin-bottom: 28px;
+}
+
+h2 { font-size: clamp(32px, 4vw, 45px); }
+
+.section-description {
+  color: #817263;
+  font-size: 14px;
+  line-height: 1.8;
+  margin-top: 12px;
+  max-width: 500px;
+}
+
+.menu-tools { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.menu-tools input, .menu-tools select, .form-control {
+  padding: 12px 14px;
+  border: 1px solid #dfd1bf;
+  background: white;
+  border-radius: 5px;
+  outline: none;
+}
+
+.menu-tools input:focus, .form-control:focus {
+  border-color: var(--orange);
+}
+
+.temperatures { display: flex; gap: 8px; margin-bottom: 28px; }
+
+.temp-btn {
+  border: 1px solid #dfd1bf;
+  background: transparent;
+  color: var(--brown);
+  padding: 10px 20px;
+  border-radius: 30px;
+}
+
+.temp-btn.active {
+  background: var(--brown);
+  color: white;
+  border-color: var(--brown);
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.product {
+  background: white;
+  border-radius: 9px;
+  overflow: hidden;
+  border: 1px solid #eee4d8;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px #55391a12;
+}
+
+.product img {
+  width: 100%;
+  height: 205px;
+  object-fit: cover;
+  display: block;
+  background: var(--light);
+}
+
+.product-info { padding: 17px; }
+
+.product-category {
+  font-size: 10px;
+  color: var(--orange);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.product h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  margin: 8px 0;
+}
+
+.product p {
+  color: #887969;
+  font-size: 12px;
+  line-height: 1.7;
+  min-height: 40px;
+}
+
+.product-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.price {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--brown);
+}
+
+.add-btn {
+  border: 0;
+  background: var(--brown);
+  color: white;
+  border-radius: 5px;
+  padding: 10px 12px;
+  font-size: 12px;
+}
+
+.add-btn:hover { background: var(--orange); }
+
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 45px;
+  color: #887969;
+}
+
+.promo {
+  background: var(--brown);
+  color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 65px 10%;
+  gap: 45px;
+}
+
+.promo-art {
+  height: 260px;
+  border-radius: 50%;
+  max-width: 300px;
+  width: 100%;
+  margin: auto;
+  background: #765237;
+  display: grid;
+  place-items: center;
+}
+
+.promo-art span { font-size: 105px; }
+.promo h2 { font-size: 47px; }
+
+.promo p:not(.eyebrow) {
+  color: #e4d5c5;
+  line-height: 1.8;
+  margin: 18px 0 24px;
+  max-width: 400px;
+  font-size: 14px;
+}
+
+.promo .eyebrow { color: #e7b58d; }
+.promo h2 em { color: #e7b58d; }
+
+.button-light {
+  display: inline-block;
+  background: var(--cream);
+  color: var(--brown);
+}
+
+.button-light:hover { background: white; }
+
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 65px;
+  align-items: center;
+}
+
+.about img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.about p:not(.eyebrow) {
+  color: #817263;
+  font-size: 14px;
+  line-height: 1.9;
+  margin: 18px 0;
+}
+
+footer {
+  background: #261b13;
+  color: #eee1d2;
+  padding: 35px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+footer p {
+  font-size: 12px;
+  color: #bba996;
+  margin-top: 8px;
+}
+
+footer a { color: #e7b58d; font-size: 13px; }
+
+/* Dialogs */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #1b120dc9;
+  z-index: 30;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.overlay.show { display: flex; }
+
+.dialog {
+  background: var(--cream);
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 28px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.dialog h2 { font-size: 30px; margin-bottom: 18px; }
+
+.close {
+  position: absolute;
+  right: 17px;
+  top: 13px;
+  border: 0;
+  background: none;
+  font-size: 27px;
+  color: var(--brown);
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e4d6c5;
+}
+
+.cart-item small {
+  display: block;
+  color: #887969;
+  margin-top: 5px;
+}
+
+.qty { display: flex; gap: 8px; align-items: center; }
+
+.qty button {
+  width: 27px;
+  height: 27px;
+  border: 1px solid #d8c6b1;
+  background: white;
+  border-radius: 4px;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 20px 0;
+}
+
+.form-group { margin: 13px 0; }
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.form-control { width: 100%; }
+.full { width: 100%; margin-top: 10px; }
+
+.form-note {
+  color: #887969;
+  font-size: 12px;
+  line-height: 1.7;
+  margin-top: 12px;
+}
+
+.order-result {
+  background: white;
+  padding: 15px;
+  border-radius: 6px;
+  line-height: 1.8;
+  font-size: 13px;
+  margin-top: 15px;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 950px) {
+  .hero { padding: 55px 6%; gap: 25px; }
+  .section { padding: 65px 6%; }
+  .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .section-heading { align-items: start; flex-direction: column; }
+  .menu-tools { width: 100%; }
+  .menu-tools input { flex: 1; min-width: 140px; }
+}
+
+@media (max-width: 650px) {
+  header { padding: 0 5%; height: 72px; }
+  .logo { font-size: 20px; }
+  .logo-icon { font-size: 25px; }
+  nav { gap: 13px; }
+  nav a { display: none; }
+  nav a.nav-btn { display: inline-block; }
+  .nav-btn { padding: 10px 12px; font-size: 12px; }
+  .hero { grid-template-columns: 1fr; padding: 48px 6%; }
+  .hero-image {
+    height: 290px;
+    max-width: 430px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .benefits {
+    grid-template-columns: 1fr;
+    padding: 25px 8%;
+    gap: 20px;
+  }
+  .products { gap: 12px; }
+  .product img { height: 145px; }
+  .product-info { padding: 12px; }
+  .product h3 { font-size: 17px; }
+  .product p { font-size: 11px; }
+  .product-bottom { align-items: start; flex-direction: column; }
+  .add-btn { width: 100%; }
+  .promo {
+    grid-template-columns: 1fr;
+    padding: 45px 8%;
+    gap: 30px;
+  }
+  .promo-art { height: 190px; max-width: 210px; }
+  .promo-art span { font-size: 75px; }
+  .promo h2 { font-size: 39px; }
+  .about { grid-template-columns: 1fr; gap: 25px; }
+  .about img { height: 260px; }
+  footer { padding: 30px 6%; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="logo" href="#home">
+    <span class="logo-icon">☕</span>
+    <span>Sip <em>&</em> Click</span>
+  </a>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#menu">Coffee Menu</a>
+    <a href="#about">About</a>
+    <button class="nav-btn" id="cartOpen">
+      Cart <span id="cartCount">0</span>
+    </button>
+    <a class="nav-btn" href="login.html">Login</a>
+    <a class="nav-btn" href="register.html">Register</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+  <div>
+    <p class="eyebrow">GOOD COFFEE, GOOD MOOD</p>
+    <h1>Your favorite coffee,<br><span>just a click away.</span></h1>
+    <p class="hero-copy">
+      Discover your next favorite drink. Choose your flavor, pick it hot or iced, and order from the comfort of your home.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#menu" class="btn">Explore the menu ↗</a>
+      <a href="#about" class="text-link">Get to know us</a>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=1000&q=85" alt="Iced coffee">
+    <div class="image-tag">☕ &nbsp; Fresh coffee, happy moments</div>
+  </div>
+</section>
+
+<section class="benefits">
+  <div class="benefit">
+    <span class="benefit-icon">♨</span>
+    <div>
+      <strong>Hot or iced</strong>
+      <small>Choose your perfect temperature</small>
+    </div>
+  </div>
+
+  <div class="benefit">
+    <span class="benefit-icon">♡</span>
+    <div>
+      <strong>Made for you</strong>
+      <small>Find the flavor you love</small>
+    </div>
+  </div>
+
+  <div class="benefit">
+    <span class="benefit-icon">⌁</span>
+    <div>
+      <strong>Easy ordering</strong>
+      <small>Your order in a few clicks</small>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="menu">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">THE GOOD STUFF</p>
+      <h2>Find your <em>coffee mood.</em></h2>
+      <p class="section-description">
+        From bold espresso to creamy favorites, there's a little something for every kind of day.
+      </p>
+    </div>
+
+    <div class="menu-tools">
+      <input type="search" id="search" placeholder="Search coffee..." aria-label="Search coffee">
+
+      <select id="category" aria-label="Filter category">
+        <option value="all">All drinks</option>
+        <option value="espresso">Espresso</option>
+        <option value="creamy">Creamy</option>
+        <option value="refreshing">Refreshing</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="temperatures">
+    <button class="temp-btn active" data-temp="Iced">❄ Iced</button>
+    <button class="temp-btn" data-temp="Hot">♨ Hot</button>
+  </div>
+
+  <div class="products" id="products"></div>
+
+  <p class="form-note">
+    Prices are in Philippine pesos (₱). Select hot or iced before adding a drink to your cart.
+  </p>
+</section>
+
+<section class="promo">
+  <div class="promo-art"><span>☕</span></div>
+
+  <div>
+    <p class="eyebrow">A LITTLE COFFEE BREAK</p>
+    <h2>Slow down.<br><em>Take a sip.</em></h2>
+    <p>
+      Make room for the small moments. Your next coffee favorite is waiting right here.
+    </p>
+    <a href="#menu" class="btn button-light">Choose your drink ↗</a>
+  </div>
+</section>
+
+<section class="section about" id="about">
+  <div>
+    <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1000&q=85" alt="Coffee being prepared">
+  </div>
+
+  <div>
+    <p class="eyebrow">OUR LITTLE COFFEE CORNER</p>
+    <h2>Good coffee.<br><em>Made simple.</em></h2>
+    <p>
+      Sip & Click is an online coffee shop concept created to make buying coffee easier and more convenient. Browse our menu, choose your favorite flavor, select hot or iced, and place your order in just a few clicks.
+    </p>
+    <p>
+      Whether you need a morning boost or an afternoon treat, we're here to make your coffee moments special.
+    </p>
+    <a href="#menu" class="btn">Browse our menu</a>
+  </div>
+</section>
+
+<section class="section" id="tracking" style="background:#fff">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">WHERE'S MY COFFEE?</p>
+      <h2>Track your <em>order.</em></h2>
+      <p class="section-description">
+        Enter the order number shown after checkout. This demo saves orders in your browser.
+      </p>
+    </div>
+  </div>
+
+  <form id="trackForm" style="display:flex;gap:10px;max-width:500px;flex-wrap:wrap">
+    <input class="form-control" id="trackNumber" placeholder="e.g. SC123456" required style="flex:1;min-width:180px">
+    <button class="btn">Track order</button>
+  </form>
+
+  <div id="trackResult"></div>
+</section>
+
+</main>
+
+<footer>
+  <div>
+    <div class="logo">☕ Sip <em>&</em> Click</div>
+    <p>Your Favorite Coffee, Hot or Iced, Just a Click Away!</p>
+  </div>
+
+  <a href="#home">Back to top ↑</a>
+
+  <p>© <span id="year"></span> Sip & Click. Student website project.</p>
+</footer>
+
+<!-- Shopping cart -->
+<div class="overlay" id="cartModal">
+  <div class="dialog">
+    <button class="close" data-close="cartModal" aria-label="Close">×</button>
+
+    <p class="eyebrow">YOUR SELECTION</p>
+    <h2>Shopping cart</h2>
+
+    <div id="cartItems"></div>
+
+    <div class="total">
+      <span>Total</span>
+      <span id="cartTotal">₱0.00</span>
+    </div>
+
+    <button class="btn full" id="checkoutBtn">Proceed to checkout</button>
+    <button class="btn full" style="background:#e8dccb;color:#593923" data-close="cartModal">
+      Continue shopping
+    </button>
+  </div>
+</div>
+
+<!-- Checkout -->
+<div class="overlay" id="checkoutModal">
+  <div class="dialog">
+    <button class="close" data-close="checkoutModal">×</button>
+
+    <p class="eyebrow">ALMOST THERE</p>
+    <h2>Place your order</h2>
+
+    <form id="checkoutForm">
+      <div class="form-group">
+        <label for="customerName">Full name</label>
+        <input class="form-control" id="customerName" required>
+      </div>
+
+      <div class="form-group">
+        <label for="customerEmail">Email address</label>
+        <input class="form-control" type="email" id="customerEmail" required>
+      </div>
+
+      <div class="form-group">
+        <label for="customerPhone">Phone number</label>
+        <input class="form-control" type="tel" id="customerPhone" required>
+      </div>
+
+      <div class="form-group">
+        <label for="customerAddress">Delivery address</label>
+        <textarea class="form-control" id="customerAddress" rows="2" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="payment">Payment method</label>
+        <select class="form-control" id="payment" required>
+          <option value="Cash on Delivery">Cash on Delivery (COD)</option>
+          <option value="GCash (demo only)">GCash (demo only)</option>
+          <option value="Pay at pickup">Pay at pickup</option>
+        </select>
+      </div>
+
+      <p class="form-note">
+        School project demo only. No real payment will be processed.
+      </p>
+
+      <button class="btn full">Confirm order</button>
+    </form>
+
+    <div id="checkoutResult"></div>
+  </div>
+</div>
+
+<script>
+const drinks = [
+  {
+    id:1,
+    name:"Classic Latte",
+    category:"creamy",
+    description:"Smooth espresso with creamy milk.",
+    price:110,
+    image:"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    id:2,
+    name:"Caramel Macchiato",
+    category:"creamy",
+    description:"Espresso, milk, and caramel sweetness.",
+    price:135,
+    image:"https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    id:3,
+    name:"Americano",
+    category:"espresso",
+    description:"Bold espresso with a clean finish.",
+    price:85,
+    image:"https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    id:4,
+    name:"Mocha",
+    category:"creamy",
+    description:"A cozy mix of coffee and chocolate.",
+    price:125,
+    image:"https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    id:5,
+    name:"Cappuccino",
+    category:"espresso",
+    description:"Rich espresso with a foamy milk top.",
+    price:115,
+    image:"https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    id:6,
+    name:"Vanilla Cold Brew",
+    category:"refreshing",
+    description:"Slow-brewed coffee with vanilla notes.",
+    price:130,
+    image:"https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    id:7,
+    name:"Spanish Latte",
+    category:"creamy",
+    description:"Sweet, creamy, and full of coffee flavor.",
+    price:125,
+    image:"https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=700&q=80"
+  },
+  {
+    id:8,
+    name:"Chocolate Frappe",
+    category:"refreshing",
+    description:"A chilled chocolate drink for sweet cravings.",
+    price:145,
+    image:"https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=700&q=80"
+  }
+];
+
+let temperature = "Iced";
+let cart = JSON.parse(localStorage.getItem("sipCart") || "[]");
+
+const money = value => "₱" + value.toFixed(2);
+
+const saveCart = () => {
+  localStorage.setItem("sipCart", JSON.stringify(cart));
+};
+
+function renderProducts() {
+  const search = document.getElementById("search").value.toLowerCase().trim();
+  const category = document.getElementById("category").value;
+
+  const filtered = drinks.filter(d =>
+    d.name.toLowerCase().includes(search) &&
+    (category === "all" || d.category === category)
+  );
+
+  document.getElementById("products").innerHTML = filtered.length
+    ? filtered.map(d => `
+      <article class="product">
+        <img src="${d.image}" alt="${d.name}" loading="lazy">
+
+        <div class="product-info">
+          <span class="product-category">${d.category}</span>
+          <h3>${d.name}</h3>
+          <p>${d.description}</p>
+
+          <div class="product-bottom">
+            <span class="price">${money(d.price)}</span>
+            <button class="add-btn" onclick="addToCart(${d.id})">
+              + Add to cart
+            </button>
+          </div>
+        </div>
+      </article>
+    `).join("")
+    : '<div class="empty">No drinks found. Try another search.</div>';
+}
+
+document.querySelectorAll(".temp-btn").forEach(button => {
+  button.addEventListener("click", () => {
+    temperature = button.dataset.temp;
+
+    document.querySelectorAll(".temp-btn").forEach(b => {
+      b.classList.toggle("active", b === button);
+    });
+  });
+});
+
+document.getElementById("search").addEventListener("input", renderProducts);
+document.getElementById("category").addEventListener("change", renderProducts);
+
+function addToCart(id) {
+  const drink = drinks.find(d => d.id === id);
+
+  const existing = cart.find(item =>
+    item.id === id && item.temperature === temperature
+  );
+
+  if (existing) {
+    existing.quantity++;
+  } else {
+    cart.push({
+      id,
+      name: drink.name,
+      price: drink.price,
+      temperature,
+      quantity: 1
+    });
+  }
+
+  saveCart();
+  renderCart();
+
+  document.getElementById("cartOpen").animate(
+    [
+      {transform:"scale(1)"},
+      {transform:"scale(1.08)"},
+      {transform:"scale(1)"}
+    ],
+    {duration:250}
+  );
+}
+
+function renderCart() {
+  const count = cart.reduce((sum,item) => sum + item.quantity, 0);
+
+  document.getElementById("cartCount").textContent = count;
+
+  const items = document.getElementById("cartItems");
+
+  if (!cart.length) {
+    items.innerHTML = '<p class="form-note">Your cart is empty. Choose a coffee from our menu.</p>';
+  } else {
+    items.innerHTML = cart.map((item,index) => `
+      <div class="cart-item">
+        <div>
+          <strong>${item.name}</strong>
+          <small>${item.temperature} · ${money(item.price)} each</small>
+        </div>
+
+        <div class="qty">
+          <button onclick="changeQty(${index},-1)" aria-label="Decrease quantity">−</button>
+          <span>${item.quantity}</span>
+          <button onclick="changeQty(${index},1)" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  document.getElementById("cartTotal").textContent =
+    money(cart.reduce((sum,item) => sum + item.price * item.quantity,0));
+
+  document.getElementById("checkoutBtn").disabled = !cart.length;
+}
+
+function changeQty(index, amount) {
+  cart[index].quantity += amount;
+
+  if (cart[index].quantity <= 0) {
+    cart.splice(index,1);
+  }
+
+  saveCart();
+  renderCart();
+}
+
+function openModal(id) {
+  document.getElementById(id).classList.add("show");
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove("show");
+}
+
+document.getElementById("cartOpen").addEventListener("click", () => {
+  renderCart();
+  openModal("cartModal");
+});
+
+document.querySelectorAll("[data-close]").forEach(button => {
+  button.addEventListener("click", () => {
+    closeModal(button.dataset.close);
+  });
+});
+
+document.querySelectorAll(".overlay").forEach(overlay => {
+  overlay.addEventListener("click", event => {
+    if (event.target === overlay) {
+      overlay.classList.remove("show");
+    }
+  });
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    document.querySelectorAll(".overlay").forEach(el => {
+      el.classList.remove("show");
+    });
+  }
+});
+
+document.getElementById("checkoutBtn").addEventListener("click", () => {
+  if (!cart.length) return;
+
+  closeModal("cartModal");
+  document.getElementById("checkoutResult").innerHTML = "";
+  openModal("checkoutModal");
+});
+
+document.getElementById("checkoutForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  if (!cart.length) return;
+
+  const orderId = "SC" + Math.floor(100000 + Math.random() * 900000);
+
+  const total = cart.reduce(
+    (sum,item) => sum + item.price * item.quantity,
+    0
+  );
+
+  const order = {
+    id: orderId,
+    name: document.getElementById("customerName").value.trim(),
+    email: document.getElementById("customerEmail").value.trim(),
+    phone: document.getElementById("customerPhone").value.trim(),
+    address: document.getElementById("customerAddress").value.trim(),
+    payment: document.getElementById("payment").value,
+    items: cart.map(item => ({...item})),
+    total,
+    status: "Order received",
+    date: new Date().toLocaleString()
+  };
+
+  const orders = JSON.parse(localStorage.getItem("sipOrders") || "[]");
+
+  orders.push(order);
+
+  localStorage.setItem("sipOrders", JSON.stringify(orders));
+
+  cart = [];
+
+  saveCart();
+  renderCart();
+
+  document.getElementById("checkoutForm").reset();
+
+  document.getElementById("checkoutResult").innerHTML = `
+    <div class="order-result">
+      <h3>☕ Order placed successfully!</h3>
+      <p>Your demo order number is:</p>
+      <h2>${orderId}</h2>
+      <p>Total: <strong>${money(total)}</strong></p>
+      <p>Payment: ${order.payment}</p>
+      <p>Save your order number to track your order.</p>
+      <button class="btn full" id="goTrack">Track this order</button>
+    </div>
+  `;
+
+  document.getElementById("goTrack").addEventListener("click", () => {
+    closeModal("checkoutModal");
+
+    document.getElementById("trackNumber").value = orderId;
+
+    document.getElementById("tracking").scrollIntoView({
+      behavior: "smooth"
+    });
+
+    showOrder(orderId);
+  });
+});
+
+function showOrder(id) {
+  const orders = JSON.parse(localStorage.getItem("sipOrders") || "[]");
+
+  const order = orders.find(o =>
+    o.id.toLowerCase() === id.trim().toLowerCase()
+  );
+
+  const result = document.getElementById("trackResult");
+
+  if (!order) {
+    result.innerHTML = `
+      <div class="order-result">
+        Order not found. Check the number and try again in the same browser where you placed the order.
+      </div>
+    `;
+    return;
+  }
+
+  result.innerHTML = `
+    <div class="order-result">
+      <h3>Order ${order.id}</h3>
+      <p><strong>Status:</strong> ${order.status}</p>
+      <p><strong>Customer:</strong> ${escapeText(order.name)}</p>
+      <p><strong>Date:</strong> ${order.date}</p>
+      <p><strong>Items:</strong> ${order.items.map(i =>
+        `${i.quantity} × ${escapeText(i.name)} (${i.temperature})`
+      ).join(", ")}</p>
+      <p><strong>Total:</strong> ${money(order.total)}</p>
+      <p><strong>Payment:</strong> ${escapeText(order.payment)}</p>
+      <small>
+        Demo status only. This website does not send orders to a real coffee shop.
+      </small>
+    </div>
+  `;
+}
+
+function escapeText(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[char]));
+}
+
+document.getElementById("trackForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  showOrder(document.getElementById("trackNumber").value);
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+renderProducts();
+renderCart();
+</script>
+
+</body>
+</html>
